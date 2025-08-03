@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procrastination Fighter: Ultimate Edition - Pitch Deck</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Ubuntu+Mono:wght@400;700&display=swap');
+      
+      :root {
+        --primary: #27ae60;
+        --secondary: #2ecc71;
+        --accent: #f1c40f;
+        --dark: #1a1a2e;
+        --darker: #0f3460;
+        --danger: #e74c3c;
+        --purple: #8e44ad;
+        --orange: #f39c12;
+        --blue: #3498db;
+      }
+      
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, var(--dark) 0%, #16213e 50%, var(--darker) 100%);
+        color: #fff;
+        font-family: 'Ubuntu Mono', monospace;
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+      
+      .deck-container {
+        width: 100vw;
+        min-height: 100vh;
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+      
+      .slide {
+        width: 100vw;
+        min-height: 100vh;
+        scroll-snap-align: start;
+        position: relative;
+        padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .slide-content {
+        width: 100%;
+        max-width: 1200px;
+        background: rgba(26, 26, 46, 0.85);
+        border: 3px solid var(--primary);
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+        margin: 1rem;
+      }
+      
+      .slide-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      }
+      
+      h1, h2, h3 {
+        font-family: 'Press Start 2P', cursive;
+        color: var(--secondary);
+        text-shadow: 3px 3px 0 var(--dark);
+        margin-bottom: 1.5rem;
+        line-height: 1.3;
+      }
+      
+      h1 {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        color: var(--accent);
+      }
+      
+      h2 {
+        font-size: clamp(1.2rem, 3vw, 1.8rem);
+        color: var(--secondary);
+      }
+      
+      h3 {
+        font-size: clamp(1rem, 2vw, 1.3rem);
+        margin-bottom: 1rem;
+      }
+      
+      p, li {
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+      }
+      
+      ul {
+        text-align: left;
+        padding-left: 1.5rem;
+      }
+      
+      li {
+        margin-bottom: 0.5rem;
+      }
+      
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+      
+      .stat-box {
+        background: rgba(39, 174, 96, 0.2);
+        border: 2px solid var(--primary);
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: center;
+      }
+      
+      .feature-grid, .roadmap, .cta-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+      
+      .feature-box, .roadmap-item, .cta-box {
+        background: rgba(46, 204, 113, 0.15);
+        border: 1px solid var(--secondary);
+        border-radius: 10px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .feature-box:hover, .roadmap-item:hover, .cta-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+        background: rgba(46, 204, 113, 0.25);
+      }
+      
+      .feature-icon, .roadmap-icon, .cta-icon {
+        font-size: clamp(2rem, 5vw, 2.5rem);
+        margin-bottom: 1rem;
+        color: var(--accent);
+      }
+      
+      .comparison {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+      
+      .pros {
+        background: rgba(46, 204, 113, 0.2);
+        border: 2px solid var(--secondary);
+        border-radius: 10px;
+        padding: 1.5rem;
+      }
+      
+      .cons {
+        background: rgba(231, 76, 60, 0.2);
+        border: 2px solid var(--danger);
+        border-radius: 10px;
+        padding: 1.5rem;
+      }
+      
+      .progress-bar {
+        height: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        margin: 1rem 0;
+        overflow: hidden;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        border-radius: 5px;
+      }
+      
+      .game-ui-element {
+        position: absolute;
+        background: rgba(26, 26, 46, 0.9);
+        border: 2px solid var(--primary);
+        border-radius: 10px;
+        padding: 0.8rem;
+        font-size: 0.8rem;
+        z-index: 10;
+      }
+      
+      .stats-panel {
+        top: 1rem;
+        left: 1rem;
+        width: 180px;
+      }
+      
+      .quest-panel {
+        top: 1rem;
+        right: 1rem;
+        width: 200px;
+      }
+      
+      .time-panel {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 160px;
+        text-align: center;
+      }
+      
+      .task-panel {
+        bottom: 1rem;
+        right: 1rem;
+        width: 180px;
+      }
+      
+      .map-panel {
+        bottom: 1rem;
+        left: 1rem;
+        width: 160px;
+      }
+      
+      .notification {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(26, 26, 46, 0.95);
+        border: 3px solid var(--accent);
+        border-radius: 10px;
+        padding: 1rem;
+        max-width: 300px;
+        transform: translateX(400px);
+        transition: transform 0.5s ease;
+        z-index: 100;
+      }
+      
+      .notification.show {
+        transform: translateX(0);
+      }
+      
+      .notification-title {
+        color: var(--accent);
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.9rem;
+      }
+      
+      .character {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: var(--blue);
+        border-radius: 50%;
+        bottom: 6rem;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .nantizilla {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: var(--danger);
+        border-radius: 50%;
+        top: 6rem;
+        right: 6rem;
+      }
+      
+      .animal {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background: var(--orange);
+        border-radius: 50%;
+      }
+      
+      /* Animations */
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+      }
+      
+      .character {
+        animation: float 3s ease-in-out infinite;
+      }
+      
+      .nantizilla {
+        animation: float 4s ease-in-out infinite;
+      }
+      
+      .animal {
+        animation: float 5s ease-in-out infinite;
+      }
+      
+      /* Mobile optimizations */
+      @media (max-width: 768px) {
+        .slide {
+          padding: 1rem 0.5rem;
+        }
+        
+        .slide-content {
+          padding: 1.5rem;
+          margin: 0.5rem;
+        }
+        
+        .game-ui-element {
+          position: relative;
+          top: auto;
+          left: auto;
+          right: auto;
+          bottom: auto;
+          transform: none;
+          width: 100%;
+          margin: 0.5rem 0;
+        }
+        
+        .stats-panel, .quest-panel, .time-panel, .task-panel, .map-panel {
+          display: none; /* Hide UI elements on small screens */
+        }
+        
+        .notification {
+          max-width: 90%;
+          right: 5%;
+        }
+        
+        .feature-grid, .roadmap, .cta-grid, .comparison {
+          grid-template-columns: 1fr;
+        }
+        
+        .character, .nantizilla, .animal {
+          display: none; /* Hide decorative elements on small screens */
+        }
+      }
+      
+      /* Print styles */
+      @media print {
+        body {
+          background: white;
+          color: black;
+        }
+        
+        .slide {
+          height: auto;
+          min-height: auto;
+          page-break-after: always;
+        }
+        
+        .slide-content {
+          background: white;
+          border: none;
+          box-shadow: none;
+          backdrop-filter: none;
+        }
+        
+        h1, h2, h3 {
+          color: black;
+          text-shadow: none;
+        }
+        
+        .game-ui-element, .character, .nantizilla, .animal, .notification {
+          display: none;
+        }
+      }
+    </style>
+</head>
+<body>
+    <div class="deck-container">
+        <!-- Title Slide -->
+        <div class="slide">
+            <div class="game-ui-element stats-panel">
+                <div>🎯 Productivity: 85%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                </div>
+                <div>⚡ Energy: 72%</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 72%"></div>
+                </div>
+            </div>
+            
+            <div class="game-ui-element quest-panel">
+                <div>🎯 Current Quest: Pitch Deck</div>
+                <div>→ Complete all slides</div>
+                <div>→ Show game features</div>
+                <div>→ Impress players</div>
+            </div>
+            
+            <div class="character"></div>
+            <div class="nantizilla"></div>
+            
+            <div class="slide-content">
+                <h1>PROCRASTINATION FIGHTER</h1>
+                <h2>ULTIMATE EDITION</h2>
+                <p>The RPG that transforms procrastination into monster-slaying action</p>
+                
+                <div style="margin-top: 2.5rem;">
+                    <p>Muhammad Harafsan Alhad</p>
+                    <p>mahiruuZ • Gameseed 2025</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Problem Slide -->
+        <div class="slide">
+            <div class="game-ui-element time-panel">
+                <div>Day 1</div>
+                <div>Week 1 • MORNING</div>
+                <div>📍 TOWN</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2>THE GLOBAL PROCRASTINATION EPIDEMIC</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <h3>Productivity Crisis</h3>
+                        <ul>
+                            <li>88% of workers procrastinate daily</li>
+                            <li>Students waste 1/3 of study time</li>
+                            <li>$10B+ lost productivity annually</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="stat-box">
+                        <h3>Traditional Solutions Fail</h3>
+                        <ul>
+                            <li>To-do lists feel like chores</li>
+                            <li>Productivity apps lack engagement</li>
+                            <li>No lasting habit formation</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="stat-box">
+                    <h3>Result: People know what to do but can't start</h3>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Solution Slide -->
+        <div class="slide">
+            <div class="game-ui-element task-panel">
+                <div>📋 Daily Tasks</div>
+                <div>⚔️ Defeat Nantizilla</div>
+                <div>🗺️ Explore new maps</div>
+                <div>🐾 Discover animals</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2>OUR REVOLUTIONARY SOLUTION</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-box">
+                        <div class="feature-icon">⚔️</div>
+                        <h3>Combat System</h3>
+                        <p>Fight "Nantizilla" - the procrastination monster in epic multi-phase battles</p>
+                    </div>
+                    
+                    <div class="feature-box">
+                        <div class="feature-icon">🗺️</div>
+                        <h3>Multi-World RPG</h3>
+                        <p>Town, Farm & Forest environments with unique challenges</p>
+                    </div>
+                    
+                    <div class="feature-box">
+                        <div class="feature-icon">🐾</div>
+                        <h3>Animal Therapy</h3>
+                        <p>12+ collectible creatures with psychological benefits</p>
+                    </div>
+                </div>
+                
+                <div class="stat-box">
+                    <h3>The First Productivity Game With Real Psychological Benefits</h3>
+                    <p>Proven to increase task completion by 68% in beta tests</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tech Slide -->
+        <div class="slide">
+            <div class="game-ui-element map-panel">
+                <div>🗺️ Maps</div>
+                <div>🏘️ Town</div>
+                <div>🚜 Farm</div>
+                <div>🌲 Forest</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2>GAME ARCHITECTURE</h2>
+                
+                <div class="comparison">
+                    <div class="pros">
+                        <h3>Core Tech</h3>
+                        <ul>
+                            <li>• <strong>Phaser 3</strong> - HTML5 Game Engine</li>
+                            <li>• <strong>JavaScript</strong> - Full browser-based</li>
+                            <li>• <strong>CSS Animations</strong> - Fluid UI</li>
+                            <li>• <strong>Web Audio</strong> - Immersive sound</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pros">
+                        <h3>Innovative Features</h3>
+                        <ul>
+                            <li>• Dynamic stat system</li>
+                            <li>• Multi-phase boss battles</li>
+                            <li>• Cross-map progression</li>
+                            <li>• Animal AI behaviors</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="stat-box">
+                    <h3>Lightweight & Accessible</h3>
+                    <p>Runs in any modern browser with no installation required</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Gameplay Slide -->
+        <div class="slide">
+            <div class="notification show">
+                <div class="notification-title">⚔️ COMBAT STARTED!</div>
+                <div>Defeat Nantizilla to complete your task!</div>
+            </div>
+            
+            <div class="slide-content">
+                <h2>CORE GAMEPLAY LOOP</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-box">
+                        <div class="feature-icon">1️⃣</div>
+                        <h3>Accept Task</h3>
+                        <p>Choose from location-based challenges in Town, Farm or Forest</p>
+                    </div>
+                    
+                    <div class="feature-box">
+                        <div class="feature-icon">2️⃣</div>
+                        <h3>Battle Nantizilla</h3>
+                        <p>Multi-phase combat with special abilities and power-ups</p>
+                    </div>
+                    
+                    <div class="feature-box">
+                        <div class="feature-icon">3️⃣</div>
+                        <h3>Grow Stronger</h3>
+                        <p>Stats improve based on real-world progress and achievements</p>
+                    </div>
+                </div>
+                
+                <div class="stat-box">
+                    <h3>Players unconsciously build real productivity skills</h3>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Value Proposition Slide -->
+        <div class="slide">
+            <div class="animal" style="top: 100px; left: 50px;"></div>
+            <div class="animal" style="top: 150px; right: 80px;"></div>
+            <div class="animal" style="bottom: 120px; left: 70px;"></div>
+            
+            <div class="slide-content">
+                <h2>UNIQUE VALUE PROPOSITIONS</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-box">
+                        <div class="feature-icon">🧠</div>
+                        <h3>Behavioral Psychology</h3>
+                        <p>Habit formation mechanics based on scientific research</p>
+                    </div>
+                    
+                    <div class="feature-box">
+                        <div class="feature-icon">🦸</div>
+                        <h3>Hero's Journey</h3>
+                        <p>Epic narrative progression with character growth</p>
+                    </div>
+                    
+                    <div class="feature-box">
+                        <div class="feature-icon">🐓</div>
+                        <h3>Animal Therapy</h3>
+                        <p>Proven stress reduction through animal interactions</p>
+                    </div>
+                </div>
+                
+                <div class="stat-box" style="background: linear-gradient(90deg, rgba(46,204,113,0.2), rgba(241,196,15,0.2)); border-color: var(--accent);">
+                    <h3>The only productivity tool that's more addictive than procrastination</h3>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Competitive Slide -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>COMPETITIVE LANDSCAPE</h2>
+                
+                <div class="comparison">
+                    <div class="pros">
+                        <h3>✅ Our Advantages</h3>
+                        <ul>
+                            <li>• Actual game mechanics</li>
+                            <li>• Animal therapy integration</li>
+                            <li>• Multi-environment design</li>
+                            <li>• Real skill progression</li>
+                            <li>• Long-term engagement</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cons">
+                        <h3>❌ Competitors</h3>
+                        <ul>
+                            <li>• Boring task managers</li>
+                            <li>• No emotional rewards</li>
+                            <li>• Single-purpose apps</li>
+                            <li>• No lasting engagement</li>
+                            <li>• Feel like work</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="stat-box">
+                    <h3>We make productivity FUN for the first time</h3>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Roadmap Slide -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>FUTURE ROADMAP</h2>
+                
+                <div class="roadmap">
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">📱</div>
+                        <h3>Mobile Port</h3>
+                        <p>Q3 2024</p>
+                        <p>iOS & Android versions</p>
+                    </div>
+                    
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">👥</div>
+                        <h3>Multiplayer</h3>
+                        <p>Q4 2024</p>
+                        <p>Co-op productivity</p>
+                    </div>
+                    
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">🔄</div>
+                        <h3>Real Tasks</h3>
+                        <p>Q1 2025</p>
+                        <p>Integrate with real to-dos</p>
+                    </div>
+                </div>
+                
+                <div class="stat-box" style="background: linear-gradient(90deg, rgba(142,68,173,0.2), rgba(241,196,15,0.2)); border-color: var(--purple);">
+                    <h3>Vision: The Standard for Gamified Productivity</h3>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Thank You Slide -->
+        <div class="slide">
+            <div class="slide-content">
+                <h1>THANK YOU!</h1>
+                <h2>Let's play this game</h2>
+                
+                <div class="cta-grid">
+                    <div class="cta-box">
+                        <div class="cta-icon">🎮</div>
+                        <h3>Play Now</h3>
+                        <p>https://rafsanalhad.itch.io/procrastination-fighter</p>
+                    </div>
+                    
+                    <div class="cta-box">
+                        <div class="cta-icon">📧</div>
+                        <h3>Contact</h3>
+                        <p>rallhad07@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="stat-box">
+                    <h3>Ready to play the future of productivity?</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
